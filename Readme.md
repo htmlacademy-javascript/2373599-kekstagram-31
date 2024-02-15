@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Antonina Sorokan](https://up.htmlacademy.ru/javascript/31/user/2373599).
-* Наставник: `Неизвестно`.
+* Наставник: [Андрей Изосимов](https://htmlacademy.ru/profile/id605037).
 
 ---
 
