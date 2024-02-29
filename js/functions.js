@@ -6,17 +6,17 @@ checkLengthString('JavaScript is interesting', 15);
 
 
 //Рабочая функция
-/*const isPalindrome = function(data) {
-  data = data.toString().toUpperCase().replace(/\s|[,.!?"/-]/g, '');
-  return data === data.split('').reverse().join('');
+/*const isPalindrome = function(string) {
+  string = string.toString().toUpperCase().replace(/\s|[,.!?"/-]/g, '');
+  return string === string.split('').reverse().join('');
 };
 
 console.log(isPalindrome('Лёша на полке клопа нашёл '));*/
 
 
-const isPalindrome = (data) => {
-  let normalizeString = data.toString().toLowerCase().replace(/\s|[,.!?"/-]/g, '');
-  normalizeString = normalizeString.split('').reverse().join('');
+const isPalindrome = (string) => {
+  const normalizeString = string.toString().toLowerCase().replace(/\s|[,.!?"/-]/g, '');
+  normalizeString.split('').reverse().join('');
   let newString = '';
 
   for (let i = normalizeString.length - 1; i >= 0; i--) {
@@ -32,8 +32,7 @@ isPalindrome('Лёша на своей полке клопа нашёл ');
 
 
 const findNumber = (string) => {
-  const convertedString = string.toString().replace(/^\D+/g, '').replace(/[^0-9]/g, '');
-  const result = parseInt(convertedString, 10);
+  const result = parseInt(string.toString().replace(/^\D+/g, ''), 10);
   return result;
 };
 
