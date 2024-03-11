@@ -2,9 +2,9 @@ import {
   getRandomInteger,
   createRandomIdFromRangeGenerator,
   getRandomElement
-} from './utils';
+} from './utils.js';
 
-import {NAMES, MESSAGES, DESCRIPTIONS} from './data';
+import {NAMES, MESSAGES, DESCRIPTIONS} from './data.js';
 
 const MIN_COMMENT = 0;
 
