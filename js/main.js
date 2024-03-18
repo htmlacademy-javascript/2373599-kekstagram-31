@@ -1,5 +1,5 @@
-import {posts} from './create-description-photo.js';
+import {renderingThumbnails} from './rendering-thumbnails.js';
+import {openModalBigPicture} from './big-picture.js';
 
-posts();
-
-import './rendering-thumbnails.js';
+renderingThumbnails();
+openModalBigPicture();
