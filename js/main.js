@@ -1,4 +1,5 @@
-import './rendering-thumbnails.js';
-import {openBigPicture} from './big-picture.js';
+import {renderingThumbnails} from './rendering-thumbnails.js';
+import {openModalBigPicture} from './big-picture.js';
 
-openBigPicture();
+renderingThumbnails();
+openModalBigPicture();
