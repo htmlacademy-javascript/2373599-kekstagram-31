@@ -15,7 +15,7 @@ const MIN_LIKES = 15;
 const MAX_LIKES = 200;
 
 //Создание комментария
-const commentsNumber = getRandomInteger(MIN_COMMENT, MAX_COMMENT);
+const commentsNumber = () => getRandomInteger(MIN_COMMENT, MAX_COMMENT);
 
 const createId = createRandomIdFromRangeGenerator(1, 25);
 const createPhotoId = createRandomIdFromRangeGenerator(1, 25);
@@ -35,7 +35,7 @@ const post = () => (
     url: `photos/${createId()}.jpg`,
     description: getRandomElement(DESCRIPTIONS),
     likes: getRandomInteger(MIN_LIKES, MAX_LIKES),
-    comments: Array.from({length: commentsNumber}, createComments),
+    comments: Array.from({length: commentsNumber()}, createComments),
   }
 );
 
