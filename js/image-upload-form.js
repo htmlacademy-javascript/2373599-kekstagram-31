@@ -1,13 +1,38 @@
 import { isEscapeKey } from './utils';
 import { error, isValidHashtags } from './checking-validity-hashtags';
+import { getChangingEffects } from './effect-slider';
 
-const body = document.querySelector('body'); //задать класс modal-open, при закрытии формы редактирования удалить класс modal-open
-const uploadForm = document.querySelector('.img-upload__form'); //Поле для загрузки нового изображения на сайт
-const uploadInput = uploadForm.querySelector('.img-upload__input'); //Изначальное состояние поля для загрузки изображения
-const uploadOverlay = uploadForm.querySelector('.img-upload__overlay'); //Форма редактирования изображения. Нужно удалать класс hidden, при закрытии формы редактирования возвращается класс hidden.
-const uploadCancel = uploadForm.querySelector('.img-upload__cancel'); //Кнопка для закрытия формы редактирования изображения
-const textHashtags = uploadForm.querySelector('.text__hashtags'); //Поле для ввода хештега
-const userComment = uploadForm.querySelector('.text__description'); //Поле для ввода комментария
+const body = document.querySelector('body');
+const uploadForm = document.querySelector('.img-upload__form');
+const uploadInput = uploadForm.querySelector('.img-upload__input');
+const uploadOverlay = uploadForm.querySelector('.img-upload__overlay');
+const uploadCancel = uploadForm.querySelector('.img-upload__cancel');
+const textHashtags = uploadForm.querySelector('.text__hashtags');
+const userComment = uploadForm.querySelector('.text__description');
+const btnScaleSmaller = uploadForm.querySelector('.scale__control--smaller');
+const btnScaleBigger = uploadForm.querySelector('.scale__control--bigger');
+const inputScale = uploadForm.querySelector('.scale__control--value');
+const imgUploadPreview = uploadForm.querySelector('.img-upload__preview img');
+const imgUploadEffects = uploadForm.querySelector('.img-upload__effects');
+
+const SCALE_STEP = 0.25;
+let scale = 1;
+
+const clickToSmaller = () => {
+  if (scale > SCALE_STEP) {
+    scale -= SCALE_STEP;
+    imgUploadPreview.style.transform = `scale(${scale})`;
+    inputScale.value = `${scale * 100}%`;
+  }
+};
+
+const clickToBigger = () => {
+  if (scale < 1) {
+    scale += SCALE_STEP;
+    imgUploadPreview.style.transform = `scale(${scale})`;
+    inputScale.value = `${scale * 100}%`;
+  }
+};
 
 const closeUploadWindow = () => {
   closePhotoEditor();
@@ -64,10 +89,17 @@ pristine.addValidator(userComment, validationOfComment, 'Длина коммен
 
 uploadForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  const valid = pristine.validate();
-  if (valid) {
+
+  if (pristine.validate()) {
+    textHashtags.value = textHashtags.value.trim().replaceAll(/\s+/g, ' ');
     uploadForm.submit();
   }
 });
+
+btnScaleSmaller.addEventListener('click', clickToSmaller);
+
+btnScaleBigger.addEventListener('click', clickToBigger);
+
+imgUploadEffects.addEventListener('change', getChangingEffects);
 
 export {initUploadModal};
