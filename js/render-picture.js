@@ -1,5 +1,5 @@
 import {isEscapeKey} from './utils.js';
-import {photos} from './rendering-thumbnails.js';
+import {photosList} from './rendering-thumbnails.js';
 import {clearComments, renderComments} from './render-comments.js';
 
 const body = document.querySelector('body');
@@ -23,7 +23,7 @@ const closeBigPictureClick = (evt) => {
 };
 
 const openBigPicture = (pictureId) => {
-  const currentPhoto = photos.find((photo) => photo.id === Number(pictureId));
+  const currentPhoto = photosList.find((photo) => photo.id === Number(pictureId));
 
   bigPictureImg.src = currentPhoto.url;
   pictureLikes.textContent = currentPhoto.likes;
