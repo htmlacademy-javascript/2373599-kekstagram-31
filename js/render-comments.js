@@ -43,7 +43,7 @@ const renderComments = (comments, i = 0, callback) => {
 };
 
 const clearComments = () => {
-  socialComment.forEach((element) => element.remove());
+  socialComments.innerHTML = '';
 };
 
 export {clearComments, renderComments};

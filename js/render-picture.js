@@ -55,4 +55,4 @@ function closeBigPicture () {
   clearComments();
 }
 
-export {openModalBigPicture};
+export {openModalBigPicture, closeBigPicture};

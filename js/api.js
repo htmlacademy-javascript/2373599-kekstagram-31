@@ -1,6 +1,3 @@
-//const body = document.querySelector('body');
-//const errorTemplate = document.querySelector('#data-error').content;
-
 const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
 
 const Route = {
@@ -18,7 +15,7 @@ const ErrorText = {
   SEND_DATA: 'Не удалось отправить форму. Попробуйте ещё раз',
 };
 
-const load = (route, errorText = null, method = Method.GET, body = null) => {
+const load = (route, errorText = null, method = Method.GET, body = null) =>
   fetch(`${BASE_URL}${route}`, {method, body})
     .then((response) => {
       if (!response.ok) {
@@ -29,7 +26,6 @@ const load = (route, errorText = null, method = Method.GET, body = null) => {
     .catch((err) => {
       throw new Error(errorText ?? err.message);
     });
-};
 
 const getData = () => load(Route.GET_DATA, ErrorText.GET_DATA);
 
