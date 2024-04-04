@@ -29,4 +29,20 @@ const getRandomElement = (array) => array[getRandomInteger(0, array.length - 1)]
 //Проверка нажатой клавиши Escape
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {getRandomInteger, createRandomIdFromRangeGenerator, getRandomElement, isEscapeKey};
+//Функция устранения дребизга
+function debounce (callback, timeoutDelay = 500) {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
+export {
+  getRandomInteger,
+  createRandomIdFromRangeGenerator,
+  getRandomElement,
+  isEscapeKey,
+  debounce
+};
