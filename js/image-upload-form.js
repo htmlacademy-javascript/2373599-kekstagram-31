@@ -1,7 +1,7 @@
 import { isEscapeKey } from './utils';
 import { pristine } from './checking-validity-hashtags';
 import { getChangingEffects } from './effect-slider';
-import { addScalesListeners, removeScalesListeners } from './scale';
+import { addScalesListeners, removeScalesListeners, resetScale } from './scale';
 import { sendData } from './api';
 import { submitBtnText, disabledBtn, enableBtn, handleSuccessMessage, handleErrorMessage, messageOfSuccess, messageOfError } from './messages';
 
@@ -47,6 +47,7 @@ function closePhotoEditor () {
   imgUploadPreview.style.filter = 'none';
   imgUploadEffectLevel.classList.add('hidden');
   uploadForm.reset();
+  resetScale();
 
   if (closePhotoEditor) {
     imgUploadPreview.style.transform = 'none';
