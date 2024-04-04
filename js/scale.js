@@ -7,6 +7,10 @@ const imgUploadPreview = uploadForm.querySelector('.img-upload__preview img');
 const SCALE_STEP = 0.25;
 let scale = 1;
 
+const resetScale = () => {
+  scale = 1;
+};
+
 const clickToSmaller = () => {
   if (scale > SCALE_STEP) {
     scale -= SCALE_STEP;
@@ -33,4 +37,4 @@ function removeScalesListeners () {
   btnScaleBigger.removeEventListener('click', clickToBigger);
 }
 
-export {addScalesListeners, removeScalesListeners};
+export {addScalesListeners, removeScalesListeners, resetScale};
