@@ -5,6 +5,7 @@ import { closePhotoEditor } from './image-upload-form.js';
 import { setUserFormSubmit } from './image-upload-form.js';
 import { getData } from './api.js';
 import { showErrorMessage } from './messages.js';
+import { loadingImage } from './loading-image.js';
 
 getData().then((photos) => {
   renderingThumbnails(photos);
@@ -15,3 +16,4 @@ getData().then((photos) => {
 setUserFormSubmit(closePhotoEditor);
 openModalBigPicture();
 initUploadModal();
+loadingImage();
