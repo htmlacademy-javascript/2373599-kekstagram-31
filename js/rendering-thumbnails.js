@@ -1,14 +1,16 @@
-import {posts} from './create-description-photo';
-
 const template = document.querySelector('#picture').content.querySelector('.picture');
 const containerPictures = document.querySelector('.pictures');
-const photosFragment = document.createDocumentFragment();
 
-const photos = posts();
+let photosList;
 
-const renderingThumbnails = () => {
+const renderingThumbnails = (photos) => {
+  const photosFragment = document.createDocumentFragment();
+
+  photosList = photos;
+
   photos.forEach(({id, url, description, likes, comments}) => {
     const photoThumbnails = template.cloneNode(true);
+
     photoThumbnails.dataset.pictureId = id;
     const image = photoThumbnails.querySelector('.picture__img');
     image.src = url;
@@ -20,4 +22,4 @@ const renderingThumbnails = () => {
   containerPictures.appendChild(photosFragment);
 };
 
-export {photos, renderingThumbnails};
+export {renderingThumbnails, photosList};

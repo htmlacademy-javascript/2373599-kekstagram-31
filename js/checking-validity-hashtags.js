@@ -1,3 +1,15 @@
+const uploadForm = document.querySelector('.img-upload__form');
+const textHashtags = uploadForm.querySelector('.text__hashtags');
+const userComment = uploadForm.querySelector('.text__description');
+
+const pristine = new Pristine(uploadForm, {
+  classTo: 'img-upload__field-wrapper',
+  errorClass: 'img-upload__field-wrapper--error',
+  errorTextParent: 'img-upload__field-wrapper',
+  errorTextTag: 'div',
+  errorTextClass: 'text__error'
+});
+
 const MAX_NUMBER_HASHTAGS = 5; //максимальное количество хештегов
 const MAX_NUMBER_SYMBOLS = 20; //максимальная длина хештега
 
@@ -57,4 +69,10 @@ const isValidHashtags = (value) => {
   });
 };
 
-export {error, isValidHashtags};
+pristine.addValidator(textHashtags, isValidHashtags, error);
+
+const validationOfComment = (value) => value.length <= 140;
+
+pristine.addValidator(userComment, validationOfComment, 'Длина комментария не должна превышать 140 символов!');
+
+export {pristine};

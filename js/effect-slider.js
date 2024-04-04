@@ -1,5 +1,5 @@
 const uploadForm = document.querySelector('.img-upload__form');
-const imgUploadPreview = uploadForm.querySelector('.img-upload__preview');
+const imgUploadPreview = uploadForm.querySelector('.img-upload__preview img');
 const inputEffectLevel = uploadForm.querySelector('.effect-level__value');
 const imgUploadEffectLevel = uploadForm.querySelector('.img-upload__effect-level');
 const effectLevelSlider = uploadForm.querySelector('.effect-level__slider');
@@ -32,6 +32,7 @@ const getChangingEffects = (evt) => {
 
   if (effect === 'none') {
     imgUploadEffectLevel.classList.add('hidden');
+    imgUploadPreview.style.filter = 'none';
   } else {
     imgUploadEffectLevel.classList.remove('hidden');
   }

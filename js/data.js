@@ -1,36 +1,70 @@
-//Исходные данные
-const NAMES = [
-  'Елена',
-  'Екатерина',
-  'Ольга',
-  'Дмитрий',
-  'Николай',
-  'Андрей',
-  'Иван',
-  'Александр',
-  'Анна',
-  'Татьяна',
-  'Михаил'
-];
+/*const EFFECT_VALUE = [];
 
-const MESSAGES = [
-  'Всё отлично!',
-  'В целом всё неплохо. Но не всё.',
-  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
-];
-
-const DESCRIPTIONS = [
-  'Интересная фотография.',
-  'На этой фотографии изображено множество деталей.',
-  'Мне кажется, фотографию сделал профессионал',
-  'На фотографии мы видим весёлых котиков',
-  'Перед нами чудесный летний лес, на который хочется смотреть вечно.',
-  'Они выглядят счастливыми.',
-  'Я считаю, что снимок получился удачным.',
-  'Мне понравилась фотография, потому что она передает эмоции и атмосферу.'
-];
-
-export {NAMES, MESSAGES, DESCRIPTIONS};
+switch (effect) {
+  case 'original':
+    imgUploadPreview.style.filter = 'none';
+    break;
+  case 'chrome':
+    effectLevelSlider.noUiSlider.updateOptions({
+      range: {
+        'min': 0,
+        'max': 1,
+      },
+      start: 1,
+      step: 0.1,
+    });
+    effectLevelSlider.noUiSlider.on('update', () => {
+      imgUploadPreview.style.filter = `grayscale(${inputEffectLevel.value})`;
+    });
+    break;
+  case 'sepia':
+    effectLevelSlider.noUiSlider.updateOptions({
+      range: {
+        'min': 0,
+        'max': 1,
+      },
+      start: 1,
+      step: 0.1,
+    });
+    effectLevelSlider.noUiSlider.on('update', () => {
+      imgUploadPreview.style.filter = `sepia(${inputEffectLevel.value})`;
+    });
+    break;
+  case 'marvin':
+    effectLevelSlider.noUiSlider.updateOptions({
+      range: {
+        'min': 0,
+        'max': 100,
+      },
+      start: 100,
+      step: 1,
+    });
+    effectLevelSlider.noUiSlider.on('update', () => {
+      imgUploadPreview.style.filter = `invert(${inputEffectLevel.value}%)`;
+    });
+    break;
+  case 'phobos':
+    effectLevelSlider.noUiSlider.updateOptions({
+      range: {
+        'min': 0,
+        'max': 3,
+      },
+      start: 3,
+      step: 0.1,
+    });
+    effectLevelSlider.noUiSlider.on('update', () => {
+      imgUploadPreview.style.filter = `blur(${inputEffectLevel.value}px)`;
+    });
+    break;
+  case 'heat':
+    effectLevelSlider.noUiSlider.updateOptions({
+      range: {
+        'min': 1,
+        'max': 3,
+      },
+      start: 3,
+      step: 0.1,
+    });
+    effectLevelSlider.noUiSlider.on('update', () => {
+      imgUploadPreview.style.filter = `brightness(${inputEffectLevel.value})`;
+    });*/
