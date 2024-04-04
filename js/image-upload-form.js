@@ -1,9 +1,9 @@
-import { isEscapeKey } from './utils';
-import { pristine } from './checking-validity-hashtags';
-import { getChangingEffects } from './effect-slider';
-import { addScalesListeners, removeScalesListeners, resetScale } from './scale';
-import { sendData } from './api';
-import { submitBtnText, disabledBtn, enableBtn, handleSuccessMessage, handleErrorMessage, messageOfSuccess, messageOfError } from './messages';
+import { isEscapeKey } from './utils.js';
+import { pristine } from './checking-validity-hashtags.js';
+import { getChangingEffects } from './effect-slider.js';
+import { addScalesListeners, removeScalesListeners, resetScale } from './scale.js';
+import { sendData } from './api.js';
+import { submitBtnText, disabledBtn, enableBtn, handleSuccessMessage, handleErrorMessage, messageOfSuccess, messageOfError } from './messages.js';
 
 const body = document.querySelector('body');
 const uploadForm = document.querySelector('.img-upload__form');
@@ -78,7 +78,6 @@ const setUserFormSubmit = (onSuccess) => {
         .finally(() => {
           enableBtn(submitBtnText.IDLE);
         });
-      //uploadForm.submit();
     }
   });
 };
