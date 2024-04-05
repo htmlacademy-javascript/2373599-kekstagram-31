@@ -116,6 +116,14 @@ function removeErrorListeners () {
   errorBtn.removeEventListener('click', byErrorBtn);
 }
 
-export {showErrorMessage, disabledBtn, enableBtn, submitBtnText, handleSuccessMessage, handleErrorMessage,
-  messageOfSuccess, messageOfError};
+export {
+  showErrorMessage,
+  disabledBtn,
+  enableBtn,
+  submitBtnText,
+  handleSuccessMessage,
+  handleErrorMessage,
+  messageOfSuccess,
+  messageOfError
+};
 
