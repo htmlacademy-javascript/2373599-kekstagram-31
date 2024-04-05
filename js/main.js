@@ -3,7 +3,9 @@ import { openModalBigPicture } from './modal-picture.js';
 import { initUploadModal, closePhotoEditor, setUserFormSubmit } from './image-upload-form.js';
 import { getData } from './api.js';
 import { showErrorMessage } from './messages.js';
+import { loadingImage } from './loading-image.js';
 import { configFilter } from './filters.js';
+
 
 getData().then((photos) => {
   renderingThumbnails(photos);
@@ -15,3 +17,4 @@ getData().then((photos) => {
 setUserFormSubmit(closePhotoEditor);
 openModalBigPicture();
 initUploadModal();
+loadingImage();
