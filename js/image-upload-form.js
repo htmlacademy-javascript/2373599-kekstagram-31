@@ -46,6 +46,7 @@ function closePhotoEditor () {
   uploadInput.value = '';
   imgUploadPreview.style.filter = 'none';
   imgUploadEffectLevel.classList.add('hidden');
+  pristine.reset();
   uploadForm.reset();
   resetScale();
 
