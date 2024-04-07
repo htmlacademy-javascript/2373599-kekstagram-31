@@ -1,4 +1,5 @@
-import { MAX_NUMBER_HASHTAGS, MAX_NUMBER_SYMBOLS } from './const';
+const MAX_NUMBER_HASHTAGS = 5; //максимальное количество хештегов
+const MAX_NUMBER_SYMBOLS = 20; //максимальная длина хештега
 
 const uploadForm = document.querySelector('.img-upload__form');
 const textHashtags = uploadForm.querySelector('.text__hashtags');
