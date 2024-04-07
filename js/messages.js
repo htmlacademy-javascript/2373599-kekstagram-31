@@ -3,8 +3,8 @@ import { isEscapeKey } from './utils.js';
 const body = document.querySelector('body');
 const uploadForm = document.querySelector('.img-upload__form');
 const btnSubmit = uploadForm.querySelector('.img-upload__submit');
-const templateSuccess = document.querySelector('#success').content;
-const templateError = document.querySelector('#error').content;
+const successTemplate = document.querySelector('#success').content.querySelector('.success');
+const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 
 //Сообщение при ошибке запроса на сервер
 const ALERT_SHOW_TIME = 5000;
@@ -42,78 +42,74 @@ const enableBtn = (text) => {
 };
 
 //Сообщения при отправке формы(успех/ошибка)
-body.appendChild(templateSuccess);
-const messageOfSuccess = body.querySelector('.success');
-messageOfSuccess.classList.add('hidden');
-const successInner = messageOfSuccess.querySelector('.success__inner');
-const successBtn = successInner.querySelector('.success__button');
 
-body.appendChild(templateError);
-const messageOfError = body.querySelector('.error');
-messageOfError.classList.add('hidden');
-const errorInner = messageOfError.querySelector('.error__inner');
-const errorBtn = errorInner.querySelector('.error__button');
-
-const closeSuccessfulByClick = function (evt) {
-  if (messageOfSuccess === evt.target) {
-    messageOfSuccess.classList.add('hidden');
+const closeOutsideModalSuccess = function (clickEvt) {
+  const successMessage = body.querySelector('.success');
+  const successInner = successMessage.querySelector('.success__inner');
+  const withinBoundariesSuccess = clickEvt.composedPath().includes(successInner);
+  if (!withinBoundariesSuccess) {
     removeSuccessListeners();
   }
 };
 
-const closeErrorByClick = function (evt) {
-  if (messageOfError === evt.target) {
-    messageOfError.classList.add('hidden');
+const closeOutsideModalError = function (clickEvt) {
+  const errorMessage = body.querySelector('.error');
+  const errorInner = errorMessage.querySelector('.error__inner');
+  const withinBoundariesError = clickEvt.composedPath().includes(errorInner);
+  if (!withinBoundariesError) {
     removeErrorListeners();
   }
 };
 
 const closeSuccessfulByKeydown = function (keydownEvt) {
   if (isEscapeKey(keydownEvt)) {
-    messageOfSuccess.classList.add('hidden');
     removeSuccessListeners();
   }
 };
 
 const closeErrorByKeydown = function (keydownEvt) {
   if (isEscapeKey(keydownEvt)) {
-    messageOfError.classList.add('hidden');
+    keydownEvt.preventDefault();
     removeErrorListeners();
   }
 };
 
-const bySuccessBtn = () => {
-  messageOfSuccess.classList.add('hidden');
+const bySuccessButton = () => {
   removeSuccessListeners();
 };
 
-const byErrorBtn = () => {
-  messageOfError.classList.add('hidden');
+const byErrorButton = () => {
   removeErrorListeners();
 };
 
 const handleSuccessMessage = function () {
-  document.addEventListener('click', closeSuccessfulByClick);
+  body.appendChild(successTemplate);
+  const successButton = body.querySelector('.success__button');
+  document.addEventListener('click', closeOutsideModalSuccess);
   document.addEventListener('keydown', closeSuccessfulByKeydown);
-  successBtn.addEventListener('click', bySuccessBtn);
+  successButton.addEventListener('click', bySuccessButton);
 };
 
 function removeSuccessListeners () {
-  document.removeEventListener('click', closeSuccessfulByClick);
+  document.removeEventListener('click', closeOutsideModalSuccess);
   document.removeEventListener('keydown', closeSuccessfulByKeydown);
-  successBtn.removeEventListener('click', bySuccessBtn);
+  const successMessage = body.querySelector('.success');
+  successMessage.parentNode.removeChild(successMessage);
 }
 
 const handleErrorMessage = function () {
-  document.addEventListener('click', closeErrorByClick);
+  body.appendChild(errorTemplate);
+  const errorButton = body.querySelector('.error__button');
+  document.addEventListener('click', closeOutsideModalError);
   document.addEventListener('keydown', closeErrorByKeydown);
-  errorBtn.addEventListener('click', byErrorBtn);
+  errorButton.addEventListener('click', byErrorButton);
 };
 
 function removeErrorListeners () {
-  document.removeEventListener('click', closeErrorByClick);
+  document.removeEventListener('click', closeOutsideModalError);
   document.removeEventListener('keydown', closeErrorByKeydown);
-  errorBtn.removeEventListener('click', byErrorBtn);
+  const errorMessage = body.querySelector('.error');
+  errorMessage.parentNode.removeChild(errorMessage);
 }
 
 export {
@@ -122,8 +118,6 @@ export {
   enableBtn,
   submitBtnText,
   handleSuccessMessage,
-  handleErrorMessage,
-  messageOfSuccess,
-  messageOfError
+  handleErrorMessage
 };
 

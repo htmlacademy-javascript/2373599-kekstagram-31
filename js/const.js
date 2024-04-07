@@ -11,4 +11,13 @@ const SORTFUNCTION = {
   discussed: (a, b) => b.comments.length - a.comments.length
 };
 
-export {MAX_PICTURE_COUNT, FILTERS, SORTFUNCTION};
+const MAX_NUMBER_HASHTAGS = 5; //максимальное количество хештегов
+const MAX_NUMBER_SYMBOLS = 20; //максимальная длина хештега
+
+export {
+  MAX_PICTURE_COUNT,
+  FILTERS,
+  SORTFUNCTION,
+  MAX_NUMBER_HASHTAGS,
+  MAX_NUMBER_SYMBOLS
+};

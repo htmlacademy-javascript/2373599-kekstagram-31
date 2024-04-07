@@ -3,7 +3,7 @@ import { pristine } from './checking-validity-hashtags.js';
 import { getChangingEffects } from './effect-slider.js';
 import { addScalesListeners, removeScalesListeners, resetScale } from './scale.js';
 import { sendData } from './api.js';
-import { submitBtnText, disabledBtn, enableBtn, handleSuccessMessage, handleErrorMessage, messageOfSuccess, messageOfError } from './messages.js';
+import { submitBtnText, disabledBtn, enableBtn, handleSuccessMessage, handleErrorMessage } from './messages.js';
 
 const body = document.querySelector('body');
 const uploadForm = document.querySelector('.img-upload__form');
@@ -15,16 +15,13 @@ const textHashtags = uploadForm.querySelector('.text__hashtags');
 const userComment = uploadForm.querySelector('.text__description');
 const imgUploadPreview = uploadForm.querySelector('.img-upload__preview img');
 const imgUploadEffects = uploadForm.querySelector('.img-upload__effects');
+const errorMessage = body.querySelector('.error__inner');
 
 const onDocumentKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
+  if (isEscapeKey(evt) && document.activeElement !== textHashtags && document.activeElement !== userComment && !errorMessage) {
     evt.preventDefault();
-    if (document.activeElement === textHashtags || document.activeElement === userComment) {
-      evt.stopPropagation();
-    } else {
-      uploadForm.reset();
-      closePhotoEditor();
-    }
+    uploadForm.reset();
+    closePhotoEditor();
   }
 };
 
@@ -35,6 +32,7 @@ function initUploadModal () {
     uploadCancel.addEventListener('click', closePhotoEditor);
     document.addEventListener('keydown', onDocumentKeydown);
     addScalesListeners();
+    pristine.validate();
   });
 }
 
@@ -69,11 +67,10 @@ const setUserFormSubmit = (onSuccess) => {
       sendData(new FormData(evt.target))
         .then(() => {
           onSuccess();
-          messageOfSuccess.classList.remove('hidden');
           handleSuccessMessage();
+          closePhotoEditor();
         })
         .catch(() => {
-          messageOfError.classList.remove('hidden');
           handleErrorMessage();
         })
         .finally(() => {

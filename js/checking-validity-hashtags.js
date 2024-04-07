@@ -1,3 +1,5 @@
+import { MAX_NUMBER_HASHTAGS, MAX_NUMBER_SYMBOLS } from './const';
+
 const uploadForm = document.querySelector('.img-upload__form');
 const textHashtags = uploadForm.querySelector('.text__hashtags');
 const userComment = uploadForm.querySelector('.text__description');
@@ -9,9 +11,6 @@ const pristine = new Pristine(uploadForm, {
   errorTextTag: 'div',
   errorTextClass: 'text__error'
 });
-
-const MAX_NUMBER_HASHTAGS = 5; //максимальное количество хештегов
-const MAX_NUMBER_SYMBOLS = 20; //максимальная длина хештега
 
 let errorMessage = ''; //изменяимая переменная для записи в неё сообщения об ошибке
 
