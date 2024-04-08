@@ -1,5 +1,5 @@
 import { isEscapeKey } from './utils.js';
-import { pristine } from './checking-validity-hashtags.js';
+import { pristine } from './validity-upload-form.js';
 import { getChangingEffects } from './effect-slider.js';
 import { addScalesListeners, removeScalesListeners, resetScale } from './scale.js';
 import { sendData } from './api.js';
@@ -15,10 +15,9 @@ const textHashtags = uploadForm.querySelector('.text__hashtags');
 const userComment = uploadForm.querySelector('.text__description');
 const imgUploadPreview = uploadForm.querySelector('.img-upload__preview img');
 const imgUploadEffects = uploadForm.querySelector('.img-upload__effects');
-const errorMessage = body.querySelector('.error__inner');
 
 const onDocumentKeydown = (evt) => {
-  if (isEscapeKey(evt) && document.activeElement !== textHashtags && document.activeElement !== userComment && !errorMessage) {
+  if (isEscapeKey(evt) && document.activeElement !== textHashtags && document.activeElement !== userComment) {
     evt.preventDefault();
     uploadForm.reset();
     closePhotoEditor();
@@ -32,7 +31,6 @@ function initUploadModal () {
     uploadCancel.addEventListener('click', closePhotoEditor);
     document.addEventListener('keydown', onDocumentKeydown);
     addScalesListeners();
-    pristine.validate();
   });
 }
 
@@ -60,14 +58,15 @@ function closePhotoEditor () {
 const setUserFormSubmit = (onSuccess) => {
   uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-
-    if (pristine.validate()) {
+    const isValid = pristine.validate();
+    if (isValid) {
       disabledBtn(submitBtnText.SENDING);
       textHashtags.value = textHashtags.value.trim().replaceAll(/\s+/g, ' ');
       sendData(new FormData(evt.target))
         .then(() => {
           onSuccess();
           handleSuccessMessage();
+          pristine.reset();
           closePhotoEditor();
         })
         .catch(() => {
@@ -82,4 +81,4 @@ const setUserFormSubmit = (onSuccess) => {
 
 imgUploadEffects.addEventListener('change', getChangingEffects);
 
-export {initUploadModal, setUserFormSubmit, closePhotoEditor};
+export {initUploadModal, setUserFormSubmit, closePhotoEditor, onDocumentKeydown};
