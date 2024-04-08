@@ -1,4 +1,5 @@
 import { isEscapeKey } from './utils.js';
+import { onDocumentKeydown } from './image-upload-form.js';
 
 const body = document.querySelector('body');
 const uploadForm = document.querySelector('.img-upload__form');
@@ -103,11 +104,13 @@ const handleErrorMessage = function () {
   document.addEventListener('click', closeOutsideModalError);
   document.addEventListener('keydown', closeErrorByKeydown);
   errorButton.addEventListener('click', byErrorButton);
+  document.removeEventListener('keydown', onDocumentKeydown);
 };
 
 function removeErrorListeners () {
   document.removeEventListener('click', closeOutsideModalError);
   document.removeEventListener('keydown', closeErrorByKeydown);
+  document.addEventListener('keydown', onDocumentKeydown);
   const errorMessage = body.querySelector('.error');
   errorMessage.parentNode.removeChild(errorMessage);
 }
