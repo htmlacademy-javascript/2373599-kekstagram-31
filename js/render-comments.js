@@ -7,14 +7,14 @@ const commentsLoader = modalBigPicture.querySelector('.comments-loader'); //<but
 
 const COMMENTS_SHOW_STEP = 5;
 
-const renderComments = (comments, i = 0, callback) => {
+const renderNextComments = (comments, i = 0, callback) => {
+  socialComments.innerHTML = '';
   const commentsLength = comments.length;
+
   const visibleCommentsCount = COMMENTS_SHOW_STEP + (COMMENTS_SHOW_STEP * i);
   const eliminatedComments = comments.slice(0, visibleCommentsCount);
 
   commentsLoader.removeEventListener('click', callback);
-
-  socialComments.innerHTML = '';
 
   for (const element of eliminatedComments) {
     const comment = socialComment.cloneNode(true);
@@ -35,15 +35,15 @@ const renderComments = (comments, i = 0, callback) => {
     commentsLoader.classList.remove('hidden');
   }
 
-  const clickHandler = () => {
-    renderComments(comments, i + 1, clickHandler);
+  const buttonClickHandler = () => {
+    renderNextComments(comments, i + 1, buttonClickHandler);
   };
 
-  commentsLoader.addEventListener('click', clickHandler);
+  commentsLoader.addEventListener('click', buttonClickHandler);
 };
 
 const clearComments = () => {
   socialComments.innerHTML = '';
 };
 
-export {clearComments, renderComments};
+export {clearComments, renderNextComments};

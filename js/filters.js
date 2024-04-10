@@ -10,8 +10,8 @@ const FILTERS = {
 };
 
 const SORTFUNCTION = {
-  random: () => 0.5 - Math.random(),
-  discussed: (a, b) => b.comments.length - a.comments.length
+  getRandomNumber: () => 0.5 - Math.random(),
+  compareDiscussed: (a, b) => b.comments.length - a.comments.length
 };
 
 const debounceRender = debounce(renderPublication);
@@ -31,25 +31,21 @@ const useFilter = () => {
       filteringPictures = pictures;
       break;
     case FILTERS.random:
-      filteringPictures = pictures.toSorted(SORTFUNCTION.random).slice(0, MAX_PICTURE_COUNT);
+      filteringPictures = pictures.toSorted(SORTFUNCTION.getRandomNumber).slice(0, MAX_PICTURE_COUNT);
       break;
     case FILTERS.discussed:
-      filteringPictures = pictures.toSorted(SORTFUNCTION.discussed);
+      filteringPictures = pictures.toSorted(SORTFUNCTION.compareDiscussed);
       break;
   }
 
   debounceRender(filteringPictures);
 };
 
-const getChangingFilter = (evt) => {
+const onFilterClick = (evt) => {
   const targetButton = evt.target;
   const currentButton = document.querySelector(`.${ACTIVE_BUTTON}`);
 
-  if (!targetButton.matches('button')) {
-    return;
-  }
-
-  if (currentButton === targetButton) {
+  if (!targetButton.matches('button') || currentButton === targetButton) {
     return;
   }
 
@@ -60,10 +56,10 @@ const getChangingFilter = (evt) => {
   useFilter();
 };
 
-function configFilter (picturesData) {
+const configFilter = (picturesData) => {
   imgFilters.classList.remove('img-filters--inactive');
-  imgFilters.addEventListener('click', getChangingFilter);
+  imgFilters.addEventListener('click', onFilterClick);
   pictures = picturesData;
-}
+};
 
 export {configFilter};
