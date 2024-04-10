@@ -1,20 +1,20 @@
-import { renderingThumbnails } from './rendering-thumbnails.js';
-import { openModalBigPicture } from './modal-picture.js';
-import { initUploadModal, closePhotoEditor, setUserFormSubmit } from './image-upload-form.js';
+import { renderThumbnail } from './render-thumbnail.js';
+import { onOpenBigPictureClick } from './modal-picture.js';
+import { onUploadModalChange, closePhotoEditor, onSetUserFormSubmit } from './image-upload-form.js';
 import { getData } from './api.js';
 import { showErrorMessage } from './messages.js';
-import { loadingImage } from './loading-image.js';
+import { onUploadImageChange } from './upload-image.js';
 import { configFilter } from './filters.js';
 
 
 getData().then((photos) => {
-  renderingThumbnails(photos);
+  renderThumbnail(photos);
   configFilter(photos);
 }).catch((error) => {
   showErrorMessage(error.message);
 });
 
-setUserFormSubmit(closePhotoEditor);
-openModalBigPicture();
-initUploadModal();
-loadingImage();
+onSetUserFormSubmit(closePhotoEditor);
+onOpenBigPictureClick();
+onUploadModalChange();
+onUploadImageChange();

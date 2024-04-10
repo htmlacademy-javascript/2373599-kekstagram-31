@@ -27,24 +27,24 @@ const showErrorMessage = (message) => {
 };
 
 //Интерактивность кнопки "Опубликовать"
-const submitBtnText = {
+const submitButtonText = {
   IDLE: 'Опубликовать',
   SENDING: 'Публикую...'
 };
 
-const disabledBtn = (text) => {
+const disableButton = (text) => {
   btnSubmit.disabled = true;
   btnSubmit.textContent = text;
 };
 
-const enableBtn = (text) => {
+const enableButton = (text) => {
   btnSubmit.disabled = false;
   btnSubmit.textContent = text;
 };
 
 //Сообщения при отправке формы(успех/ошибка)
 
-const closeOutsideModalSuccess = function (clickEvt) {
+const onOutsideModalSuccessClick = (clickEvt) => {
   const successMessage = body.querySelector('.success');
   const successInner = successMessage.querySelector('.success__inner');
   const withinBoundariesSuccess = clickEvt.composedPath().includes(successInner);
@@ -53,7 +53,7 @@ const closeOutsideModalSuccess = function (clickEvt) {
   }
 };
 
-const closeOutsideModalError = function (clickEvt) {
+const onOutsideModalErrorClick = (clickEvt) => {
   const errorMessage = body.querySelector('.error');
   const errorInner = errorMessage.querySelector('.error__inner');
   const withinBoundariesError = clickEvt.composedPath().includes(errorInner);
@@ -62,54 +62,54 @@ const closeOutsideModalError = function (clickEvt) {
   }
 };
 
-const closeSuccessfulByKeydown = function (keydownEvt) {
+const onSuccessfulByKeydown = (keydownEvt) => {
   if (isEscapeKey(keydownEvt)) {
     removeSuccessListeners();
   }
 };
 
-const closeErrorByKeydown = function (keydownEvt) {
+const onErrorByKeydown = (keydownEvt) => {
   if (isEscapeKey(keydownEvt)) {
     keydownEvt.preventDefault();
     removeErrorListeners();
   }
 };
 
-const bySuccessButton = () => {
+const onSuccessButtonClick = () => {
   removeSuccessListeners();
 };
 
-const byErrorButton = () => {
+const onErrorButtonClick = () => {
   removeErrorListeners();
 };
 
-const handleSuccessMessage = function () {
+const successMessageClickHandler = () => {
   body.appendChild(successTemplate);
   const successButton = body.querySelector('.success__button');
-  document.addEventListener('click', closeOutsideModalSuccess);
-  document.addEventListener('keydown', closeSuccessfulByKeydown);
-  successButton.addEventListener('click', bySuccessButton);
+  document.addEventListener('click', onOutsideModalSuccessClick);
+  document.addEventListener('keydown', onSuccessfulByKeydown);
+  successButton.addEventListener('click', onSuccessButtonClick);
 };
 
 function removeSuccessListeners () {
-  document.removeEventListener('click', closeOutsideModalSuccess);
-  document.removeEventListener('keydown', closeSuccessfulByKeydown);
+  document.removeEventListener('click', onOutsideModalSuccessClick);
+  document.removeEventListener('keydown', onSuccessfulByKeydown);
   const successMessage = body.querySelector('.success');
   successMessage.parentNode.removeChild(successMessage);
 }
 
-const handleErrorMessage = function () {
+const errorMessageClickHandler = () => {
   body.appendChild(errorTemplate);
   const errorButton = body.querySelector('.error__button');
-  document.addEventListener('click', closeOutsideModalError);
-  document.addEventListener('keydown', closeErrorByKeydown);
-  errorButton.addEventListener('click', byErrorButton);
+  document.addEventListener('click', onOutsideModalErrorClick);
+  document.addEventListener('keydown', onErrorByKeydown);
+  errorButton.addEventListener('click', onErrorButtonClick);
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
 function removeErrorListeners () {
-  document.removeEventListener('click', closeOutsideModalError);
-  document.removeEventListener('keydown', closeErrorByKeydown);
+  document.removeEventListener('click', onOutsideModalErrorClick);
+  document.removeEventListener('keydown', onErrorByKeydown);
   document.addEventListener('keydown', onDocumentKeydown);
   const errorMessage = body.querySelector('.error');
   errorMessage.parentNode.removeChild(errorMessage);
@@ -117,10 +117,10 @@ function removeErrorListeners () {
 
 export {
   showErrorMessage,
-  disabledBtn,
-  enableBtn,
-  submitBtnText,
-  handleSuccessMessage,
-  handleErrorMessage
+  disableButton,
+  enableButton,
+  submitButtonText,
+  successMessageClickHandler,
+  errorMessageClickHandler
 };
 

@@ -1,4 +1,4 @@
-import { initUploadModal } from './image-upload-form';
+import { onUploadModalChange } from './image-upload-form';
 import { showErrorMessage } from './messages';
 
 const fileChooser = document.querySelector('.img-upload__start input[type=file]');
@@ -8,7 +8,7 @@ const effectsPreview = document.querySelectorAll('.effects__preview');
 
 const FILE_TYPES = ['.jpg', '.jpeg', '.png', '.gif', '.jfif'];
 
-const loadingImage = () => {
+const onUploadImageChange = () => {
   fileChooser.addEventListener('change', () => {
     const file = fileChooser.files[0];
     const fileName = file.name.toLowerCase();
@@ -24,8 +24,8 @@ const loadingImage = () => {
       showErrorMessage('Неверный тип файла');
       return;
     }
-    initUploadModal();
+    onUploadModalChange();
   });
 };
 
-export {loadingImage};
+export {onUploadImageChange};

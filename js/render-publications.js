@@ -1,4 +1,4 @@
-import { renderingThumbnails } from './rendering-thumbnails';
+import { renderThumbnail } from './render-thumbnail';
 
 const containerPictures = document.querySelector('.pictures');
 
@@ -11,7 +11,7 @@ const clearPublication = () => {
 const renderPublication = (picturesData) => {
   clearPublication();
   pictures = picturesData;
-  renderingThumbnails(pictures);
+  renderThumbnail(pictures);
 };
 
 export {renderPublication};

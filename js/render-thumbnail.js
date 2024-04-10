@@ -2,8 +2,9 @@ const template = document.querySelector('#picture').content.querySelector('.pict
 const containerPictures = document.querySelector('.pictures');
 
 let photosList;
+const getPhotos = () => photosList;
 
-const renderingThumbnails = (photos) => {
+const renderThumbnail = (photos) => {
   const photosFragment = document.createDocumentFragment();
 
   photosList = photos;
@@ -22,4 +23,4 @@ const renderingThumbnails = (photos) => {
   containerPictures.appendChild(photosFragment);
 };
 
-export {renderingThumbnails, photosList};
+export {renderThumbnail, getPhotos};

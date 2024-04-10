@@ -15,7 +15,7 @@ const pristine = new Pristine(uploadForm, {
 
 let errorMessage = ''; //изменяимая переменная для записи в неё сообщения об ошибке
 
-const error = () => errorMessage; //функция, которая будет возвращать сообщение об ошибках
+const getError = () => errorMessage; //функция, которая будет возвращать сообщение об ошибках
 
 const isValidHashtags = (value) => {
   errorMessage = '';
@@ -69,10 +69,10 @@ const isValidHashtags = (value) => {
   });
 };
 
-pristine.addValidator(textHashtags, isValidHashtags, error);
+pristine.addValidator(textHashtags, isValidHashtags, getError);
 
-const validationOfComment = (value) => value.length <= 140;
+const checkСomment = (value) => value.length <= 140;
 
-pristine.addValidator(userComment, validationOfComment, 'Длина комментария не должна превышать 140 символов!');
+pristine.addValidator(userComment, checkСomment, 'Длина комментария не должна превышать 140 символов!');
 
 export {pristine};

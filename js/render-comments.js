@@ -6,44 +6,46 @@ const socialCommentTotalCount = modalBigPicture.querySelector('.social__comment-
 const commentsLoader = modalBigPicture.querySelector('.comments-loader'); //<button type="button" class="social__comments-loader  comments-loader">Загрузить еще
 
 const COMMENTS_SHOW_STEP = 5;
+let currentCount = 0;
+let comments = [];
 
-const renderComments = (comments, i = 0, callback) => {
-  const commentsLength = comments.length;
-  const visibleCommentsCount = COMMENTS_SHOW_STEP + (COMMENTS_SHOW_STEP * i);
-  const eliminatedComments = comments.slice(0, visibleCommentsCount);
+socialComments.innerHTML = '';
 
-  commentsLoader.removeEventListener('click', callback);
+const renderNextComments = () => {
+  const eliminatedComments = comments.slice(currentCount, currentCount + COMMENTS_SHOW_STEP);
+  const visibleCommentsCount = eliminatedComments.length + currentCount;
 
-  socialComments.innerHTML = '';
+  eliminatedComments.forEach((comment) => {
+    const сommentNode = socialComment.cloneNode(true);
+    const authorOfComment = сommentNode.querySelector('.social__picture');
 
-  for (const element of eliminatedComments) {
-    const comment = socialComment.cloneNode(true);
-    comment.querySelector('.social__picture').src = element.avatar;
-    comment.querySelector('.social__picture').alt = element.name;
-    comment.querySelector('.social__text').textContent = element.message;
+    authorOfComment.src = comment.avatar;
+    authorOfComment.alt = comment.name;
+    сommentNode.querySelector('.social__text').textContent = comment.message;
+    socialComments.append(сommentNode);
 
-    socialCommentShowCount.textContent = eliminatedComments.length;
+    socialCommentShowCount.textContent = visibleCommentsCount;
+  });
 
-    socialComments.append(comment);
-  }
+  socialCommentTotalCount.textContent = comments.length;
 
-  socialCommentTotalCount.textContent = commentsLength;
-
-  if (commentsLength < COMMENTS_SHOW_STEP || commentsLength <= visibleCommentsCount) {
+  if (visibleCommentsCount >= comments.length) {
     commentsLoader.classList.add('hidden');
-  } else {
-    commentsLoader.classList.remove('hidden');
   }
-
-  const clickHandler = () => {
-    renderComments(comments, i + 1, clickHandler);
-  };
-
-  commentsLoader.addEventListener('click', clickHandler);
+  currentCount += COMMENTS_SHOW_STEP;
 };
 
 const clearComments = () => {
+  currentCount = 0;
   socialComments.innerHTML = '';
+  commentsLoader.classList.remove('hidden');
+  commentsLoader.removeEventListener('click', renderNextComments);
+};
+
+const renderComments = (currentPhotoComments) => {
+  comments = currentPhotoComments;
+  renderNextComments();
+  commentsLoader.addEventListener('click', renderNextComments);
 };
 
 export {clearComments, renderComments};

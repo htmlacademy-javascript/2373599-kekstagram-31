@@ -11,7 +11,7 @@ const resetScale = () => {
   scale = 1;
 };
 
-const clickToSmaller = () => {
+const onSmallerClick = () => {
   if (scale > SCALE_STEP) {
     scale -= SCALE_STEP;
     imgUploadPreview.style.transform = `scale(${scale})`;
@@ -19,7 +19,7 @@ const clickToSmaller = () => {
   }
 };
 
-const clickToBigger = () => {
+const onBiggerClick = () => {
   if (scale < 1) {
     scale += SCALE_STEP;
     imgUploadPreview.style.transform = `scale(${scale})`;
@@ -27,14 +27,14 @@ const clickToBigger = () => {
   }
 };
 
-function addScalesListeners () {
-  btnScaleSmaller.addEventListener('click', clickToSmaller);
-  btnScaleBigger.addEventListener('click', clickToBigger);
-}
+const addScalesListeners = () => {
+  btnScaleSmaller.addEventListener('click', onSmallerClick);
+  btnScaleBigger.addEventListener('click', onBiggerClick);
+};
 
-function removeScalesListeners () {
-  btnScaleSmaller.removeEventListener('click', clickToSmaller);
-  btnScaleBigger.removeEventListener('click', clickToBigger);
-}
+const removeScalesListeners = () => {
+  btnScaleSmaller.removeEventListener('click', onSmallerClick);
+  btnScaleBigger.removeEventListener('click', onBiggerClick);
+};
 
 export {addScalesListeners, removeScalesListeners, resetScale};
