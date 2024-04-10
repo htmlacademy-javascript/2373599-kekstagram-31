@@ -1,6 +1,6 @@
 import { isEscapeKey } from './utils.js';
 import { getPhotos } from './render-thumbnail.js';
-import { clearComments, renderNextComments} from './render-comments.js';
+import { clearComments, renderComments} from './render-comments.js';
 
 const body = document.querySelector('body');
 const pictureContainer = document.querySelector('.pictures');
@@ -30,7 +30,7 @@ const openBigPicture = (pictureId) => {
   pictureLikes.textContent = currentPhoto.likes;
   socialCaption.textContent = currentPhoto.description;
 
-  renderNextComments(currentPhoto.comments, i + 1);
+  renderComments(currentPhoto.comments);
 
   modalBigPicture.classList.remove('hidden');
   bigPictureCancel.addEventListener('click', onBigPictureClick);
