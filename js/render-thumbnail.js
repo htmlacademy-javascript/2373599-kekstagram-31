@@ -4,7 +4,7 @@ const containerPictures = document.querySelector('.pictures');
 let photosList;
 const getPhotos = () => photosList;
 
-const renderThumbnail = (photos) => {
+const visualizeThumbnails = (photos) => {
   const photosFragment = document.createDocumentFragment();
 
   photosList = photos;
@@ -23,4 +23,4 @@ const renderThumbnail = (photos) => {
   containerPictures.appendChild(photosFragment);
 };
 
-export {renderThumbnail, getPhotos};
+export {visualizeThumbnails, getPhotos};

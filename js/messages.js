@@ -32,12 +32,12 @@ const submitButtonText = {
   SENDING: 'Публикую...'
 };
 
-const disableButton = (text) => {
+const getDisableButton = (text) => {
   btnSubmit.disabled = true;
   btnSubmit.textContent = text;
 };
 
-const enableButton = (text) => {
+const getEnableButton = (text) => {
   btnSubmit.disabled = false;
   btnSubmit.textContent = text;
 };
@@ -117,8 +117,8 @@ function removeErrorListeners () {
 
 export {
   showErrorMessage,
-  disableButton,
-  enableButton,
+  getDisableButton,
+  getEnableButton,
   submitButtonText,
   successMessageClickHandler,
   errorMessageClickHandler

@@ -3,7 +3,7 @@ import { pristine } from './validity-upload-form.js';
 import { addEffects, removeEffects } from './effect-slider.js';
 import { addScalesListeners, removeScalesListeners, resetScale } from './scale.js';
 import { sendData } from './api.js';
-import { submitButtonText, disableButton, enableButton, successMessageClickHandler, errorMessageClickHandler } from './messages.js';
+import { submitButtonText, getDisableButton, getEnableButton, successMessageClickHandler, errorMessageClickHandler } from './messages.js';
 
 const body = document.querySelector('body');
 const uploadForm = document.querySelector('.img-upload__form');
@@ -57,7 +57,7 @@ const onSetUserFormSubmit = (onSuccess) => {
     evt.preventDefault();
     const isValid = pristine.validate();
     if (isValid) {
-      disableButton(submitButtonText.SENDING);
+      getDisableButton(submitButtonText.SENDING);
       textHashtags.value = textHashtags.value.trim().replaceAll(/\s+/g, ' ');
       sendData(new FormData(evt.target))
         .then(() => {
@@ -70,7 +70,7 @@ const onSetUserFormSubmit = (onSuccess) => {
           errorMessageClickHandler();
         })
         .finally(() => {
-          enableButton(submitButtonText.IDLE);
+          getEnableButton(submitButtonText.IDLE);
         });
     }
   });
