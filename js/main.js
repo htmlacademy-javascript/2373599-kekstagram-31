@@ -1,4 +1,4 @@
-import { renderThumbnail } from './render-thumbnail.js';
+import { visualizeThumbnails } from './render-thumbnail.js';
 import { onOpenBigPictureClick } from './modal-picture.js';
 import { onUploadModalChange, closePhotoEditor, onSetUserFormSubmit } from './image-upload-form.js';
 import { getData } from './api.js';
@@ -8,7 +8,7 @@ import { configFilter } from './filters.js';
 
 
 getData().then((photos) => {
-  renderThumbnail(photos);
+  visualizeThumbnails(photos);
   configFilter(photos);
 }).catch((error) => {
   showErrorMessage(error.message);
